@@ -17,6 +17,10 @@ set(imgui_render_types D3D9 D3D10 D3D11 D3D12 OpenGL2 OpenGL3 Vulkan WGPU SDL)
 set(imgui_backend None CACHE STRING "The backend ImGui should use.")
 set(imgui_render None CACHE STRING "The render-backend ImGui should use.")
 
+# Hardcoded value
+set(imgui_backend SDL)
+set(imgui_render SDL)
+
 set_property(CACHE imgui_render PROPERTY STRINGS ${imgui_render_types})
 set_property(CACHE imgui_backend PROPERTY STRINGS ${imgui_backend_types})
 
