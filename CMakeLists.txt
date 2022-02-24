@@ -118,25 +118,14 @@ endif()
 # --------------------------------------------------------------------------------------------------------
 
 if (${imgui_backend} STREQUAL "SDL")
-    if (NOT TARGET SDL2::SDL2)
-        find_package(SDL2 REQUIRED)
-    endif()
-    target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2)
+    add_subdirectory(SDL)
+    target_link_libraries(
+        ${PROJECT_NAME} 
+        PUBLIC 
+            SDL2main
+            SDL2-static
+        )
     target_sources(${PROJECT_NAME} PRIVATE "imgui/backends/imgui_impl_sdl.cpp")
-elseif(${imgui_backend} STREQUAL "GLFW")
-    if (NOT TARGET glfw)
-        find_package(glfw3 REQUIRED)
-    endif()
-    target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
-    target_sources(${PROJECT_NAME} PRIVATE "imgui/backends/imgui_impl_glfw.cpp")
-elseif(${imgui_backend} STREQUAL "GLUT")
-    if (NOT TARGET GLUT::GLUT)
-        find_package(GLUT REQUIRED)
-    endif()
-    target_link_libraries(${PROJECT_NAME} PUBLIC GLUT::GLUT)
-    target_sources(${PROJECT_NAME} PRIVATE "imgui/backends/imgui_impl_glut.cpp")
-elseif(${imgui_backend} STREQUAL WIN32)
-    target_sources(${PROJECT_NAME} PRIVATE "imgui/backends/imgui_impl_win32.cpp")
 endif()
 
 # --------------------------------------------------------------------------------------------------------
